@@ -18,8 +18,9 @@ public class AtualizarVendaPanel extends javax.swing.JPanel {
 
     private java.awt.CardLayout cardLayout;
     private AtualizarVendaPanel atualizarVendaPanel;
+    private ExcluirVendaPanel excluirVendaPanel;
     JPanel mainPanel;
-    ListarVendasPanel listarVendasPanel = new ListarVendasPanel(cardLayout, mainPanel, atualizarVendaPanel);
+    ListarVendasPanel listarVendasPanel = new ListarVendasPanel(cardLayout, mainPanel, atualizarVendaPanel, excluirVendaPanel);
 
     /**
      * Creates new form excluirVendaPanel

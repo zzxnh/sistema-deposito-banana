@@ -23,16 +23,18 @@ public class ListarVendasPanel extends javax.swing.JPanel {
     private VendaDAO dao = new VendaDAO();
     private int idSelecionado = -1;
     private AtualizarVendaPanel atualizarVendaPanel;
+    private ExcluirVendaPanel excluirVendaPanel;
     JPanel mainPanel;
 
     /**
      * Creates new form listarVendasPanel
      */
-    public ListarVendasPanel(CardLayout cardLayout, JPanel mainPanel, AtualizarVendaPanel atualizarVendaPanel) {
+    public ListarVendasPanel(CardLayout cardLayout, JPanel mainPanel, AtualizarVendaPanel atualizarVendaPanel, ExcluirVendaPanel excluirVendaPanel) {
         initComponents();
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
         this.atualizarVendaPanel = atualizarVendaPanel;
+        this.excluirVendaPanel = excluirVendaPanel;
         listarVendas();
     }
 
@@ -276,6 +278,19 @@ public class ListarVendasPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarActionPerformed
+        int linha = tabelaVendas.getSelectedRow();
+
+        if (linha == -1) {
+            JOptionPane.showMessageDialog(this,
+                    "Selecione uma venda!");
+            return;
+        }
+
+        int idCliente = Integer.parseInt(
+                tabelaVendas.getValueAt(linha, 0).toString());
+
+        excluirVendaPanel.carregarVenda(idCliente);
+
         cardLayout.show(mainPanel, "EXCLUIR VENDA");
     }//GEN-LAST:event_btnApagarActionPerformed
 

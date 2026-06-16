@@ -10,6 +10,7 @@ import com.joseproject.a3_paduan.model.Cliente;
 import com.joseproject.a3_paduan.model.TipoDeBanana;
 import java.awt.CardLayout;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -18,25 +19,26 @@ import javax.swing.table.DefaultTableModel;
  * @author Usuario
  */
 public class ListarTiposDeBananasPanel extends javax.swing.JPanel {
+
     private java.awt.CardLayout cardLayout;
     private ClienteDAO dao = new ClienteDAO();
     private int idSelecionado = -1;
+    private ExcluirTipoBananaPanel excluirTipoBananaPanel;
+
     JPanel mainPanel;
-    
-    
+
     /**
      * Creates new form listarClientePainel
      */
-    public ListarTiposDeBananasPanel(CardLayout cardLayout, JPanel mainPanel) {
+    public ListarTiposDeBananasPanel(CardLayout cardLayout, JPanel mainPanel, ExcluirTipoBananaPanel excluirTipoBananaPanel) {
         initComponents();
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
+        this.excluirTipoBananaPanel = excluirTipoBananaPanel;
         listarTiposDeBananas();
     }
-    
-    
-    
-    public void limparCampos(){
+
+    public void limparCampos() {
         txtNome.setText("");
         txtId.setText("");
     }
@@ -188,8 +190,7 @@ public class ListarTiposDeBananasPanel extends javax.swing.JPanel {
         for (TipoDeBanana a : lista) {
             model.addRow(new Object[]{
                 a.getIdTipoBanana(),
-                a.getNomeTipoBanana(),
-            });
+                a.getNomeTipoBanana(),});
         }
     }
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
@@ -197,12 +198,25 @@ public class ListarTiposDeBananasPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarActionPerformed
-        cardLayout.show(mainPanel, "EXCLUIR TIPO DE BANANA"); 
+        int linha = tabelaTipos.getSelectedRow();
+
+        if (linha == -1) {
+            JOptionPane.showMessageDialog(this,
+                    "Selecione um tipo de banana!");
+            return;
+        }
+
+        int idTipo = Integer.parseInt(
+                tabelaTipos.getValueAt(linha, 0).toString());
+
+        excluirTipoBananaPanel.carregarTipo(idTipo);
+        
+        cardLayout.show(mainPanel, "EXCLUIR TIPO DE BANANA");
     }//GEN-LAST:event_btnApagarActionPerformed
 
     private void tabelaTiposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaTiposMouseClicked
         int linha = tabelaTipos.getSelectedRow();
-        
+
         txtNome.setText(tabelaTipos.getValueAt(linha, 1).toString());
         txtId.setText(tabelaTipos.getValueAt(linha, 0).toString());
     }//GEN-LAST:event_tabelaTiposMouseClicked

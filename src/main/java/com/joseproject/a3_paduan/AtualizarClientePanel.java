@@ -19,7 +19,8 @@ public class AtualizarClientePanel extends javax.swing.JPanel {
     private java.awt.CardLayout cardLayout;
     JPanel mainPanel;
     private AtualizarClientePanel atualizarClientePanel;
-    private ListarClientePanel listarClientePanel = new ListarClientePanel(cardLayout, mainPanel, atualizarClientePanel);
+    private ExcluirClientePanel excluirClientePanel;
+    private ListarClientePanel listarClientePanel = new ListarClientePanel(cardLayout, mainPanel, atualizarClientePanel, excluirClientePanel);
 
     /**
      * Creates new form excluirVendaPanel

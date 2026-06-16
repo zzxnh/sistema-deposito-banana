@@ -145,6 +145,7 @@ public class CadastrarClientePanel extends javax.swing.JPanel {
             ClienteDAO dao = new ClienteDAO();
             
             dao.salvar(cliente);
+            
             limparCampos();
 
             JOptionPane.showMessageDialog(this, "Cliente cadastrado com sucesso!");

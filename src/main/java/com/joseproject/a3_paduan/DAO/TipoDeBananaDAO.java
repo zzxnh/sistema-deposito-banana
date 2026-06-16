@@ -122,4 +122,38 @@ public class TipoDeBananaDAO {
 
         return tipo;
     }
+    
+    public TipoDeBanana buscarPorId(int idTipo) {
+
+        String sql
+                = "SELECT * FROM tipos_banana "
+                + "WHERE id_tipo = ?";
+
+        TipoDeBanana tipo = null;
+
+        try (Connection conn = Conexao.getConnection(); 
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, idTipo);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+
+                tipo = new TipoDeBanana();
+
+                tipo.setIdTipoBanana(
+                        rs.getInt("id_tipo"));
+
+                tipo.setNomeTipoBanana(
+                        rs.getString("nome_tipo"));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(
+                    "Erro ao buscar tipo de banana!", e);
+        }
+
+        return tipo;
+    }
 }

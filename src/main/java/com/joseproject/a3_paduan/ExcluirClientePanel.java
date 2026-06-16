@@ -5,6 +5,7 @@
 package com.joseproject.a3_paduan;
 
 import com.joseproject.a3_paduan.DAO.ClienteDAO;
+import com.joseproject.a3_paduan.model.Cliente;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -17,8 +18,9 @@ public class ExcluirClientePanel extends javax.swing.JPanel {
 
     private java.awt.CardLayout cardLayout;
     private AtualizarClientePanel atualizarClientePanel;
+    private ExcluirClientePanel excluirClientePanel;
     JPanel mainPanel;
-    private ListarClientePanel  listarClientePanel = new ListarClientePanel(cardLayout, mainPanel, atualizarClientePanel);
+    private ListarClientePanel listarClientePanel = new ListarClientePanel(cardLayout, mainPanel, atualizarClientePanel, excluirClientePanel);
 
     /**
      * Creates new form excluirClientePanel
@@ -29,12 +31,28 @@ public class ExcluirClientePanel extends javax.swing.JPanel {
         this.mainPanel = mainPanel;
     }
 
+    public void carregarCliente(int idCliente) {
+
+        ClienteDAO dao = new ClienteDAO();
+
+        Cliente cliente = dao.buscarPorId(idCliente);
+
+        txtIdClienteExcluir.setText(
+                String.valueOf(cliente.getIdCliente()));
+
+    }
+
     public boolean validadarCampos() {
         if (txtIdClienteExcluir.getText().trim().isEmpty()) {
             return false;
         }
 
         return true;
+    }
+
+    public void limparCampos() {
+        txtIdClienteExcluir.setText("");
+        txtMotivoExclusao.setText("");
     }
 
     /**
@@ -130,7 +148,6 @@ public class ExcluirClientePanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtMotivoExclusaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMotivoExclusaoActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_txtMotivoExclusaoActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
@@ -149,18 +166,20 @@ public class ExcluirClientePanel extends javax.swing.JPanel {
         }
 
         try {
-                int id = Integer.parseInt(txtIdClienteExcluir.getText());
-                
-                ClienteDAO dao = new ClienteDAO();
-                
-                dao.excluir(id);
-                
-                listarClientePanel.listarClientes();
-                
-                JOptionPane.showMessageDialog(this, "Cliente excluído com sucesso! ");
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, e.getMessage());
-            }
+            int id = Integer.parseInt(txtIdClienteExcluir.getText());
+
+            ClienteDAO dao = new ClienteDAO();
+
+            dao.excluir(id);
+
+            listarClientePanel.listarClientes();
+
+            limparCampos();
+
+            JOptionPane.showMessageDialog(this, "Cliente excluído com sucesso! ");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
     }//GEN-LAST:event_btnExcluirClienteActionPerformed
 
 

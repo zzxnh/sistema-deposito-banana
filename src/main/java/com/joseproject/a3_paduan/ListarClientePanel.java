@@ -21,16 +21,18 @@ public class ListarClientePanel extends javax.swing.JPanel {
     private java.awt.CardLayout cardLayout;
     private int idSelecionado = -1;
     private AtualizarClientePanel atualizarClientePanel;
+    private ExcluirClientePanel excluirClientePanel;
     JPanel mainPanel;
 
     /**
      * Creates new form listarClientePainel
      */
-    public ListarClientePanel(CardLayout cardLayout, JPanel mainPanel, AtualizarClientePanel atualizarClientePanel) {
+    public ListarClientePanel(CardLayout cardLayout, JPanel mainPanel, AtualizarClientePanel atualizarClientePanel, ExcluirClientePanel excluirClientePanel) {
         initComponents();
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
         this.atualizarClientePanel = atualizarClientePanel;
+        this.excluirClientePanel = excluirClientePanel;
 
         listarClientes();
     }
@@ -200,6 +202,19 @@ public class ListarClientePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarActionPerformed
+        int linha = tabelaClientes.getSelectedRow();
+
+        if (linha == -1) {
+            JOptionPane.showMessageDialog(this,
+                    "Selecione um cliente!");
+            return;
+        }
+
+        int idCliente = Integer.parseInt(
+                tabelaClientes.getValueAt(linha, 0).toString());
+
+        excluirClientePanel.carregarCliente(idCliente);
+
         cardLayout.show(mainPanel, "EXCLUIR CLIENTE");
     }//GEN-LAST:event_btnApagarActionPerformed
 

@@ -4,7 +4,9 @@
  */
 package com.joseproject.a3_paduan;
 
+import com.joseproject.a3_paduan.DAO.ClienteDAO;
 import com.joseproject.a3_paduan.DAO.VendaDAO;
+import com.joseproject.a3_paduan.model.Venda;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -14,10 +16,13 @@ import javax.swing.JPanel;
  * @author Usuario
  */
 public class ExcluirVendaPanel extends javax.swing.JPanel {
+
     private java.awt.CardLayout cardLayout;
     private AtualizarVendaPanel atualizarVendaPanel;
+    private ExcluirVendaPanel excluirVendaPanel;
     JPanel mainPanel;
-    ListarVendasPanel listarVendasPanel = new ListarVendasPanel(cardLayout, mainPanel, atualizarVendaPanel);
+    ListarVendasPanel listarVendasPanel = new ListarVendasPanel(cardLayout, mainPanel, atualizarVendaPanel, excluirVendaPanel);
+
     /**
      * Creates new form excluirVendaPanel
      */
@@ -26,7 +31,19 @@ public class ExcluirVendaPanel extends javax.swing.JPanel {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
     }
-    
+
+    public void carregarVenda(int idVenda) {
+
+        VendaDAO dao = new VendaDAO();
+
+        Venda venda = dao.buscarPorId(idVenda);
+
+        txtIdVenda.setText(
+                String.valueOf(venda.getIdVenda()));
+
+        
+    }
+
     public boolean validadarCampos() {
         if (txtIdVenda.getText().trim().isEmpty()) {
             return false;
@@ -34,11 +51,12 @@ public class ExcluirVendaPanel extends javax.swing.JPanel {
 
         return true;
     }
-    
-    private void limparCampos(){
+
+    private void limparCampos() {
         txtIdVenda.setText("");
         txtMotivoExclusao.setText("");
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -144,20 +162,20 @@ public class ExcluirVendaPanel extends javax.swing.JPanel {
         }
 
         try {
-                int id = Integer.parseInt(txtIdVenda.getText());
-                
-                VendaDAO dao = new VendaDAO();
-                
-                dao.excluir(id);
-                
-                listarVendasPanel.listarVendas();
-                
-                limparCampos();
-                
-                JOptionPane.showMessageDialog(this, "Venda excluída com sucesso! ");
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, e.getMessage());
-            }
+            int id = Integer.parseInt(txtIdVenda.getText());
+
+            VendaDAO dao = new VendaDAO();
+
+            dao.excluir(id);
+
+            listarVendasPanel.listarVendas();
+
+            limparCampos();
+
+            JOptionPane.showMessageDialog(this, "Venda excluída com sucesso! ");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
     }//GEN-LAST:event_btnExcluirVendaActionPerformed
 
 

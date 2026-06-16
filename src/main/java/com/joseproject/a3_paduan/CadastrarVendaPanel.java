@@ -19,7 +19,8 @@ import javax.swing.JPanel;
  * @author Usuario
  */
 public class CadastrarVendaPanel extends javax.swing.JPanel {
-    private ListarClientePanel  listarClientePanel;
+
+    private ListarClientePanel listarClientePanel;
     private java.awt.CardLayout cardLayout;
     JPanel mainPanel;
 
@@ -89,13 +90,18 @@ public class CadastrarVendaPanel extends javax.swing.JPanel {
     }
 
     private boolean validarCampos() {
-        int qtde = Integer.parseInt(txtQtdeCaixas.getText());
-        double preco = Double.parseDouble(txtPrecoUni.getText());
-        
-        if (qtde <= 0 || preco <=0) {
+        if (txtQtdeCaixas.getText().trim().isEmpty()
+                || txtPrecoUni.getText().trim().isEmpty()) {
             return false;
         }
-      
+
+        int qtde = Integer.parseInt(txtQtdeCaixas.getText());
+        double preco = Double.parseDouble(txtPrecoUni.getText());
+
+        if (qtde <= 0 || preco <= 0) {
+            return false;
+        }
+
         if (txtQtdeCaixas.getText().trim().isEmpty() || txtPrecoUni.getText().trim().isEmpty()) {
             return false;
         }
@@ -127,7 +133,7 @@ public class CadastrarVendaPanel extends javax.swing.JPanel {
         cmbIdTipoBanana = new javax.swing.JComboBox<>();
 
         lbCadastarVenda.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
-        lbCadastarVenda.setText("Cadastar Venda");
+        lbCadastarVenda.setText("Cadastrar Venda");
 
         lbIdCliente.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         lbIdCliente.setText("Nome Cliente:");
@@ -331,15 +337,15 @@ public class CadastrarVendaPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSalvarVendaActionPerformed
 
     private void txtPrecoUniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecoUniActionPerformed
-       
+
     }//GEN-LAST:event_txtPrecoUniActionPerformed
 
     private void cmbIdTipoBananaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbIdTipoBananaActionPerformed
-        
+
     }//GEN-LAST:event_cmbIdTipoBananaActionPerformed
 
     private void cmbNomeClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbNomeClienteActionPerformed
-        
+
     }//GEN-LAST:event_cmbNomeClienteActionPerformed
 
     private void txtTotalKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTotalKeyReleased

@@ -30,15 +30,15 @@ public class MainFrame extends javax.swing.JFrame {
         cadastrarClientePanel = new CadastrarClientePanel(cardLayout, mainPainel);
         cadastrarVendaPanel = new CadastrarVendaPanel(cardLayout, mainPainel);
         cadastrarTipoNovoPanel = new CadastrarTipoNovoPanel(cardLayout, mainPainel);
-        excluirClientePanel = new ExcluirClientePanel(cardLayout, mainPainel);
-        excluirVendaPanel = new ExcluirVendaPanel(cardLayout, mainPainel);
+        excluirClientePanel = new ExcluirClientePanel(cardLayout, mainPainel);        
+        listarClientePanel = new ListarClientePanel(cardLayout, mainPainel, atualizarClientePanel, excluirClientePanel);
+        excluirVendaPanel = new ExcluirVendaPanel(cardLayout, mainPainel);        
+        listarVendasPanel = new ListarVendasPanel(cardLayout, mainPainel, atualizarVendaPanel, excluirVendaPanel);
         excluirTipoBananaPanel = new ExcluirTipoBananaPanel(cardLayout, mainPainel);
-        listarVendasPanel = new ListarVendasPanel(cardLayout, mainPainel, atualizarVendaPanel);
-        listarTiposDeBananasPanel = new ListarTiposDeBananasPanel(cardLayout, mainPainel);
+        listarTiposDeBananasPanel = new ListarTiposDeBananasPanel(cardLayout, mainPainel, excluirTipoBananaPanel);
         atualizarVendaPanel = new AtualizarVendaPanel(cardLayout, mainPainel);        
-        listarVendasPanel = new ListarVendasPanel(cardLayout, mainPainel, atualizarVendaPanel);
+        //listarVendasPanel = new ListarVendasPanel(cardLayout, mainPainel, atualizarVendaPanel);
         atualizarClientePanel = new AtualizarClientePanel(cardLayout, mainPainel);
-        listarClientePanel = new ListarClientePanel(cardLayout, mainPainel, atualizarClientePanel);
         JPanel painelImagem = new PainelImagem();
 
         mainPainel.add(painelImagem, "PAINEL IMAGEM");
@@ -105,6 +105,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         getContentPane().add(mainPainel, java.awt.BorderLayout.CENTER);
 
+        jMenuBar1.setBorder(null);
+
         jMenu1.setText("Cliente");
 
         menuCadastroClientes.setText("Cadastrar cliente");
@@ -145,6 +147,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu3.setBorder(null);
         jMenu3.setText("Tipos de Bananas");
 
         menuAddTipoBanana.setText("Cadastrar tipo novo");

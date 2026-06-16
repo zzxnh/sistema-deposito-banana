@@ -8,15 +8,19 @@ import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import com.joseproject.a3_paduan.DAO.TipoDeBananaDAO;
+import com.joseproject.a3_paduan.model.TipoDeBanana;
 
 /**
  *
  * @author Usuario
  */
 public class ExcluirTipoBananaPanel extends javax.swing.JPanel {
+
     private java.awt.CardLayout cardLayout;
+    private ExcluirTipoBananaPanel excluirTipoBananaPanel;
     JPanel mainPanel;
-    ListarTiposDeBananasPanel listarTiposDeBananasPanel = new ListarTiposDeBananasPanel(cardLayout, mainPanel);
+    ListarTiposDeBananasPanel listarTiposDeBananasPanel = new ListarTiposDeBananasPanel(cardLayout, mainPanel, excluirTipoBananaPanel);
+
     /**
      * Creates new form RemoverTipoBananaPanel
      */
@@ -26,6 +30,17 @@ public class ExcluirTipoBananaPanel extends javax.swing.JPanel {
         this.mainPanel = mainPanel;
     }
 
+    public void carregarTipo(int idTipo) {
+
+        TipoDeBananaDAO dao = new TipoDeBananaDAO();
+
+        TipoDeBanana tipo = dao.buscarPorId(idTipo);
+
+        txtTipo.setText(
+                String.valueOf(tipo.getIdTipoBanana()));
+
+    }
+
     public boolean validadarCampos() {
         if (txtTipo.getText().trim().isEmpty()) {
             return false;
@@ -33,10 +48,11 @@ public class ExcluirTipoBananaPanel extends javax.swing.JPanel {
 
         return true;
     }
-    
-    private void limparCampos(){
+
+    private void limparCampos() {
         txtTipo.setText("");
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,9 +73,10 @@ public class ExcluirTipoBananaPanel extends javax.swing.JPanel {
         jLabel1.setText("Excluir Tipo de Banana");
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        jLabel2.setText("Tipo de banana:");
+        jLabel2.setText("ID Tipo de banana:");
 
         txtTipo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        txtTipo.addActionListener(this::txtTipoActionPerformed);
 
         btnExcluir.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         btnExcluir.setText("Excluir");
@@ -78,7 +95,7 @@ public class ExcluirTipoBananaPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(243, Short.MAX_VALUE)
+                .addContainerGap(213, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -126,24 +143,27 @@ public class ExcluirTipoBananaPanel extends javax.swing.JPanel {
         if (!validadarCampos()) {
             JOptionPane.showMessageDialog(this, "Preencha os campos obrigatórios! ");
         }
-        
+
         try {
-                int id = Integer.parseInt(txtTipo.getText());
-                
-                TipoDeBananaDAO dao = new TipoDeBananaDAO();
-                
-                dao.excluir(id);
-                
-                listarTiposDeBananasPanel.listarTiposDeBananas();
-                
-                limparCampos();
-                
+            int id = Integer.parseInt(txtTipo.getText());
+
+            TipoDeBananaDAO dao = new TipoDeBananaDAO();
+
+            dao.excluir(id);
+
+            listarTiposDeBananasPanel.listarTiposDeBananas();
+
+            limparCampos();
+
             JOptionPane.showMessageDialog(this, "Tipo de banana excluído com sucesso! ");
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, e.getMessage());
-            }    
-        
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+
     }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void txtTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTipoActionPerformed
+    }//GEN-LAST:event_txtTipoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
