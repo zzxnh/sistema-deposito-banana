@@ -1,7 +1,8 @@
 # sistema-deposito-banana
 Sistema de gerenciamento de clientes e vendas para um depósito de bananas desenvolvido em Java Swing e MySQL.
 Sistema de Depósito de Bananas 🍌
-Sobre o Projeto
+
+Sobre o Projeto:
 
 O Sistema de Depósito de Bananas foi desenvolvido em Java com interface gráfica Swing e integração com banco de dados MySQL. O objetivo do sistema é auxiliar no gerenciamento de clientes, vendas e tipos de bananas comercializados em um depósito.
 
@@ -34,6 +35,6 @@ Banco de Dados
 
 O sistema utiliza MySQL para armazenamento dos dados de clientes, vendas e tipos de bananas.
 
-Desenvolvedor
+Desenvolvedor:
 
 Projeto desenvolvido por José Henrique para fins acadêmicos.
